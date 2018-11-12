@@ -1,0 +1,581 @@
+
+<!-- BEGIN CORE CSS FRAMEWORK -->
+<link href="webarch/css/webarch.css" rel="stylesheet" type="text/css"/>
+<link href="assets/plugins/bootstrapv3/css/bootstrap.min.css" rel="stylesheet" type="text/css"/>
+<link href="assets/plugins/bootstrapv3/css/bootstrap-theme.min.css" rel="stylesheet" type="text/css"/>
+<link href="assets/plugins/font-awesome/css/font-awesome.css" rel="stylesheet" type="text/css"/>
+<link href="assets/plugins/animate.css-master/animate.css" rel="stylesheet" type="text/css"/>
+
+<link href="chat_icons/font/flaticon.css" rel="stylesheet" type="text/css"/>
+<!-- END CORE CSS FRAMEWORK -->
+<script src="assets/plugins/jquery/jquery-1.11.3.min.js" type="text/javascript"></script> 
+<script type="text/javascript" src="assets/plugins/iframe-resizer-master/js/iframeResizer.contentWindow.js"></script>
+
+<script type="text/javascript">
+var config;
+var targetOrigin="*";
+var iconOffset=10;
+var chatWindowOffset=40;
+var $messageWrapper;
+var $messageHeader;
+var $messageInputWrapper;
+var $messageInput
+$(function(){
+      init();
+});
+
+window.addEventListener('message', function(e) {
+       var message = e.data;
+       if(message.chatIcon){
+        console.log(JSON.stringify(message));
+        setConfiguration(message);
+       }
+       
+   });
+
+window.iFrameResizer = {
+    readyCallback: function(){
+       loadWidget();  
+    }
+  }
+
+function init(){
+
+  
+  $messageWrapper=$("#messages-wrapper");
+  $messageHeader=$(".chat-messages-header");
+  $messageInputWrapper=$(".chat-input-wrapper");
+  $messageInput=$("#chat-message-input");
+
+  $("#btnContainer").addClass('animated flipInY');
+
+  $messageInput.focus(function(){
+    $messageInputWrapper.css("border-color","#2b7ed6");
+  });
+  $messageInput.blur(function(){
+    $messageInputWrapper.css("border-color","#e2e2e2");
+  });
+
+
+  $("#btnContainer .btn-chat").click(function(){
+
+    if($(this).find(".chat-switch ").hasClass("close-minimized-chat")){
+       closeChatWindow(config);
+    }else{
+       minimizeChatWindow(config);
+    }
+    
+  });
+
+  $(".chat-back").click(function(){
+      if($(this).find(".window-switch").hasClass("max-window")){
+        maximizeChatWindow(config);
+      }else{
+        closeChatWindow(config);
+      }
+  });
+
+}
+
+function loadWidget(){
+    config={
+     "chatIcon": {
+        "type": "icon",
+        "iconUrl": "glyph-icon flaticon-sms",
+        "bgHeight": 80,
+        "bgWidth": 80,
+        "bgRadius": 17,
+        "bgColor": "#113f75",
+        "imgHeight": 50,
+        "imgWidth": 50,
+        "fontSize": 40,
+        "color": "#fff"
+     },
+     "chatWindow": {
+        "mini":{
+          "wrapperHeight":230,
+          "wrapperWidth":350,
+          "headerHeight":120,
+          "headerWidth":350,
+          "inputBottomPosition":0,
+          "inputHeight":80,
+          "placeholder":"Leave a message..",
+          "offlineMessage":"Hi there! So we’re away right now, but if you leave us a message we’ll get back to you soon."
+        },
+        "max":{
+          "wrapperHeight":470,
+          "wrapperWidth":350,
+          "headerHeight":70,
+          "headerWidth":350,
+          "inputBottomPosition":55,
+          "inputHeight":50,
+          "placeholder":"Type your message",
+          "offlineMessage":"Hi there! So we’re away right now, but if you leave us a message we’ll get back to you soon."
+        }
+     }
+  };
+  setConfiguration(config);
+ }  
+
+
+
+function closeChatWindow(config){
+    $messageWrapper.hide();
+    $messageWrapper.removeClass('animated zoomInUp');
+    $("#btnContainer").addClass('animated flipInY');
+    $("#btnContainer").css("display","block");
+    setChatIcon(config);
+
+}
+
+function minimizeChatWindow(config){
+    var c=config.chatWindow.mini;
+
+    $(".chat-messages").hide();
+    $(".chat-back").find("span").html("<i class='window-switch max-window fa fa-ellipsis-h'></i>");
+    $messageWrapper.css("height",c.wrapperHeight+"px");
+    $messageWrapper.css("width",c.wrapperWidth+"px");
+    $messageWrapper.css("bottom",$("#btnContainer").outerHeight()+"px");
+    $messageHeader.css("height",c.headerHeight+"px");
+    $messageHeader.css("width",c.headerWidth+"px");
+    $messageInputWrapper.css("bottom",c.inputBottomPosition+"px");
+    $(".chat-message-description").html(c.offlineMessage);
+    $(".chat-message-description").show();
+    $messageInput.attr("placeholder",c.placeholder);
+    $messageInput.css("height",c.inputHeight);
+    $(".add-btn-content").hide();
+
+    $("#btnContainer").find(".btn-chat").html("<span class='chat-switch animated flipInY close-minimized-chat'>X</span>");
+    var iconConfig=config.chatIcon;
+    var closeIcon=$(".close-minimized-chat");
+    closeIcon.css("color",iconConfig.color);
+    closeIcon.css("font-size",iconConfig.fontSize+"px");
+    closeIcon.css("line-height",iconConfig.bgHeight+"px");
+    $messageWrapper.addClass('animated zoomInUp');
+    $messageWrapper.show();
+    var frame={};
+    frame.height=$messageWrapper.outerHeight()+$("#btnContainer").outerHeight()+chatWindowOffset;
+    frame.width=$messageWrapper.outerWidth()+chatWindowOffset;
+    frame.top="auto";
+    frame.left="auto";
+    frame.right=25;
+    frame.bottom=25;
+    setIframeStyle(frame);
+
+}
+
+function maximizeChatWindow(config){
+
+    setChatIcon(config);
+
+    var c=config.chatWindow.max;
+    $(".chat-messages").show();
+    $(".chat-back").find("span").html("<span class='window-switch'>X</span>");
+    $messageWrapper.css("height",c.wrapperHeight+"px");
+    $messageWrapper.css("width",c.wrapperWidth+"px");
+    $messageWrapper.css("bottom","0px");
+    $messageHeader.css("height",c.headerHeight+"px");
+    $messageHeader.css("width",c.headerWidth+"px");
+    $messageInputWrapper.css("bottom",c.inputBottomPosition+"px");
+    $(".chat-message-description").html("");
+    $(".chat-message-description").hide();
+    $(".add-btn-content").show();
+    $messageInput.attr("placeholder",c.placeholder);
+    $messageInput.css("height",c.inputHeight);
+    $("#btnContainer").hide();
+    $messageWrapper.removeClass('animated');
+    $messageWrapper.removeClass('zoomInUp');
+    $messageWrapper.show();
+    $messageWrapper.addClass('animated bounceInRight');
+    var frame={};
+    frame.height=$messageWrapper.outerHeight()+chatWindowOffset;
+    frame.width=$messageWrapper.outerWidth()+chatWindowOffset;
+    frame.top="auto";
+    frame.left="auto";
+    frame.right=25;
+    frame.bottom=25;
+    setIframeStyle(frame);
+}
+
+function setIframeStyle(frame){
+  if ('parentIFrame' in window) {
+      var iframeStyle="position:fixed;z-index:573672372;display:block;max-height:100vh;max-width: 100vw;";
+      iframeStyle+="background: none transparent;opacity: 1;visibility: visible;transition: none 0s ease 0s;";
+      iframeStyle+="height:"+frame.height+"px !important;width:"+frame.width+"px !important;";
+      iframeStyle+="top:"+frame.top+";left:"+frame.left+";bottom:"+frame.bottom+"px;right:"+frame.right+"px;";
+      console.log(iframeStyle);
+      window.parentIFrame.sendMessage(iframeStyle, targetOrigin);
+    }
+}
+
+function setConfiguration(config){
+
+    setChatIcon(config);
+
+}
+
+function setChatIcon(config){
+
+    var iconConfig=config.chatIcon;
+    var $icon=$(".btn-chat");
+    $icon.css("background-color",iconConfig.bgColor);
+    $icon.css("height",iconConfig.bgHeight+"px");
+    $icon.css("width",iconConfig.bgWidth+"px");
+    $icon.css("border-radius",iconConfig.bgRadius+"%");
+
+    if(iconConfig.type="icon"){
+      var i="<i class='chat-switch "+iconConfig.iconUrl+"'></i>";
+      $icon.html(i);
+      $icon.find("i").css("color",iconConfig.color);
+      $icon.find("i").css("font-size",iconConfig.fontSize+"px");
+      $icon.find("i").css("line-height",iconConfig.bgHeight+"px");
+    }else if(iconConfig.type="image"){
+      var i="<img class='chat-switch' src='"+iconConfig.iconUrl+"'/>";
+      $icon.html(i);
+      $icon.find("img").css("height",iconConfig.imgHeight+"px");
+      $icon.find("img").css("width",iconConfig.imgWidth+"px");
+      $icon.find("img").css("line-height",iconConfig.bgHeight+"px");
+    }
+    var frameHeight=parseFloat(iconConfig.bgHeight)+iconOffset;
+    var frameWidth=parseFloat(iconConfig.bgWidth)+iconOffset;
+    var frame={height:frameHeight,width:frameWidth,top:"auto",left:"auto",right:25,bottom:25}
+    setIframeStyle(frame);
+
+}
+
+</script>
+
+      <div class="btn-container" id="btnContainer">
+         <div class="btn-chat"><i class="fa fa-comments"></i></div>
+      </div>
+       <div id="messages-wrapper"  class="custom-chat-wrapper chat-wrapper-position" style="display: none;">
+
+        <div class="clearfix"></div>	
+        <div class="chat-messages-header">
+            <div class="chat-profile-wrapper">
+                 <div class="chat-pic"><img src="assets/img/prof.jpg"/></div>
+                 <span class="chat-name">Shankar</span>
+                 <div class="chat-message-description">
+                   Hi there! So we’re away right now, but if you leave us a message we’ll get back to you soon.
+                 </div>
+            </div>
+            
+            <a href="#" class="chat-back"><span><span class="window-switch">X</span></span></a>
+        </div>
+        <div class="chat-messages clearfix">
+         
+            <div class="sent_time">Yesterday 11:25pm</div>
+         <div class="user-details-wrapper " >
+                <div class="user-profile">
+                    <img src="assets/img/avatar.png"  alt="" data-src="assets/img/avatar.png" data-src-retina="assets/img/avatar.png" width="35" height="35">
+                </div>
+                <div class="user-details">
+                  <div class="bubble">	
+                        Hello, You there?
+                   </div>
+                </div>					
+                <div class="clearfix"></div>
+               <div class="sent_time off">Yesterday 11:25pm</div>
+                <div class="sent_actions">
+                </div>
+            </div>		
+            <div class="user-details-wrapper ">
+                <div class="user-profile">
+                   <img src="assets/img/avatar.png"  alt="" data-src="assets/img/avatar.png" data-src-retina="assets/img/avatar.png" width="35" height="35">
+                </div>
+                <div class="user-details">
+                  <div class="bubble">	
+                        How was the meeting?
+                   </div>
+                </div>					
+                <div class="clearfix"></div>
+                <div class="sent_time off">Yesterday 11:25pm</div>
+            </div>
+            <div class="user-details-wrapper ">
+                <div class="user-profile">
+                    <img src="assets/img/avatar.png"  alt="" data-src="assets/img/avatar.png" data-src-retina="assets/img/avatar.png" width="35" height="35">
+                </div>
+                <div class="user-details">
+                  <div class="bubble">	
+                        Let me know when you free
+                   </div>
+                </div>					
+                <div class="clearfix"></div>
+                <div class="sent_time off">Yesterday 11:25pm</div>
+            </div>
+            <div class="sent_time ">Today 11:25pm</div>
+            <div class="user-details-wrapper pull-right">
+                
+                <div class="user-details">
+                  <div class="bubble sender">	
+                        Let me know when you free
+                   </div>
+                </div>	
+                
+                <div class="clearfix"></div>
+                <div class="sent_time off">Sent On Tue, 2:45pm</div>
+            </div>		
+        </div>
+        <div class="chat-input-wrapper">
+            <textarea id="chat-message-input" rows="1" placeholder="Type your message"></textarea>
+            <div class="row m-t-5 add-btn-content">
+              <div class="col-md-12 m-l-10">
+                <span class="add-link"><i class="fa fa-smile-o"></i></span>
+                <span class="add-link m-l-10"><i class="fa fa-paperclip"></i></span>
+              </div>
+            </div>
+
+        </div>
+        <div class="clearfix"></div>
+        </div>
+
+
+<style>
+
+body{
+    background-color: transparent !important;
+
+}
+
+.btn-container{
+    position: fixed;
+    bottom: 0px;
+    right: 10px;
+    z-index: 100000;
+}
+.btn-chat{
+    text-align: center;
+    cursor: pointer;
+    box-shadow: 0 5px 25px 0 rgba(0, 0, 0, 0.08);
+}
+.btn-chat img{
+    margin-left: auto;
+    margin-right: auto;
+}
+.btn-chat:hover{
+    
+}
+ .custom-chat-wrapper {
+    font-size: 13px;
+    width: 350px;
+    height: 470px;
+    background-color: #ffffff;
+    text-align: left;
+    -webkit-transition: opacity 0.1s ease;
+    transition: opacity 0.1s ease;
+    border-radius: 10px;
+    box-shadow: 0 5px 25px 0 rgba(0, 0, 0, 0.08);
+    margin: 10px;
+}
+.chat-wrapper-position{
+    position: absolute;
+    bottom: 0px;
+    right: 0px;
+    z-index: 2000000;
+}        
+.chat-messages-header{
+    background-color: rgb(26, 67, 113);
+    color: rgb(255, 255, 255);
+    height: 120px;
+    border-radius: 5px 5px 0 0;
+    padding: 20px;
+    font-size: 20px;
+    font-weight: 300;
+}       
+.custom-chat-wrapper .inner-content {
+  height: 100%;
+  overflow: hidden;
+}
+.custom-chat-wrapper .chat-header {
+  height: 58px;
+}
+.custom-chat-wrapper .side-widget {
+  margin-top: 15px;
+  display: block;
+}
+.custom-chat-wrapper .side-widget-title {
+  color: #808285;
+  font-size: 10.5px;
+  font-weight: 600;
+  letter-spacing: 0.2px;
+  padding-left: 31px;
+  padding-right: 31px;
+  text-transform: uppercase;
+}
+.custom-chat-wrapper .side-widget-content {
+  display: block;
+}
+.custom-chat-wrapper .side-widget-content ul.groups {
+  list-style: none;
+  margin: 0;
+  margin-top: 10px;
+  padding-left: 0;
+}
+.custom-chat-wrapper .side-widget-content ul.groups li {
+  line-height: 25px;
+}
+.custom-chat-wrapper .side-widget-content ul.groups > li > a {
+  color: #ffffff;
+  font-size: 13px;
+  padding: 5px 31px;
+}
+.custom-chat-wrapper .side-widget-content ul.groups > li > a:hover {
+  text-decoration: none;
+}
+.custom-chat-wrapper .user-details-wrapper {
+  display: block;
+  margin: 8px;
+  padding: 10px;
+  border-radius: 3px;
+}
+.custom-chat-wrapper .user-details-wrapper .status-icon {
+  margin-right: 0px;
+}
+.custom-chat-wrapper .user-details-wrapper > .user-profile {
+  display: inline-block;
+  float: left;
+  border-radius: 100px 100px 100px 100px;
+  height: 35px;
+  overflow: hidden;
+  width: 35px;
+  margin-right: 13px;
+}
+.custom-chat-wrapper .user-details-wrapper > .user-details {
+  display: inline-block;
+  float: left;
+}
+.custom-chat-wrapper .user-details-wrapper > .user-details > .user-name {
+  display: block;
+  color: #ffffff;
+}
+.custom-chat-wrapper .user-details-wrapper > .user-details > .user-more {
+  display: block;
+  color: #f8f6f6;
+  font-size: 11px;
+  width: 120px;
+}
+.custom-chat-wrapper .chat-messages {
+    position: relative;
+    overflow: auto;
+    height: 350px;
+    max-height: 350px;
+    padding-bottom: 50px;
+}
+.custom-chat-wrapper .chat-messages .user-details-wrapper {
+  padding: 6px;
+}
+
+.custom-chat-wrapper .user-details-status-wrapper {
+  display: inline-block;
+  float: left;
+  min-width: 32px;
+  margin-top: 8px;
+}
+.custom-chat-wrapper .user-details-count-wrapper {
+  display: inline-block;
+  float: left;
+  margin-top: 8px;
+}
+ .chat-input-wrapper {
+       position: relative;
+    bottom: 50px;
+    background-color: #ffffff;
+    width: 350px;
+    padding: 7px;
+    z-index: 110;
+}
+
+.chat-messages-header a > span {
+    font-size: 30px;
+    float: right;
+    margin-top: -5px;
+    margin-right: 5px;
+    font-weight: 100;
+    color: #ffffffba;
+  }  
+.chat-messages-header a > span:hover {
+    color: #ffffff;
+}
+.chat-message-container{
+  padding: 10px;
+}
+.bubble {
+    position: relative;
+    width: 165px;
+    min-height: 40px;
+    padding: 0px;
+    background: #e5e9ec;
+    -webkit-border-radius: 3px;
+    -moz-border-radius: 3px;
+    border-radius: 25px;
+    color: #22262e;
+    padding: 10px;
+    cursor: pointer;
+}
+.bubble:after{
+  display: none;
+}
+.bubble.sender {
+    background: #29415d;
+    color: #ffffff;
+}
+.add-link{
+    font-size: 23px;
+    color: #96999c;
+}
+.chat-input-wrapper{
+    position: relative;
+    bottom: 55px;
+    background-color: #ffffff;
+    width: 350px;
+    padding: 7px;
+    z-index: 110;
+    border-top: 1px solid #e2e2e2;
+ }
+    
+.chat-input-wrapper textarea {
+    background-color: #ffffff;
+    padding: 0;
+    margin: 0;
+    width: 100%;
+    height: 50px;
+    border: 0px;
+    resize: none;
+}
+.chat-pic{
+    position: absolute;
+    top: -20px;
+    left: 10px;
+}
+.chat-pic img{
+    height: 80px;
+    width: 80px;
+    border: 2px solid #21466d;
+    border-radius: 50%;
+}
+.chat-name{
+    position: absolute;
+    left: 100px;
+    top: 10px;
+    color: #ffffffba;
+    cursor: pointer;
+}
+.chat-name:hover{
+  color: #ffffff;
+}
+.chat-message-description{
+    color: white;
+    font-size: 14px;
+    height: 30px;
+    position: absolute;
+    width: 85%;
+    top: 65px;
+    font-weight: 300;
+}
+</style>        
+
+<script src="assets/plugins/jquery/jquery-1.11.3.min.js" type="text/javascript"></script> 
+<script src="http://code.jquery.com/ui/1.11.4/jquery-ui.min.js"></script>
+<script src="assets/plugins/bootstrapv3/js/bootstrap.min.js" type="text/javascript"></script> 
+<script src="assets/plugins/bootstrap-tag/bootstrap-tagsinput.js" type="text/javascript"></script>
+<script src="assets/js/chat.js" type="text/javascript"></script> 

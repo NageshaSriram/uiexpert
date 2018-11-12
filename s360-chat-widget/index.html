@@ -1,0 +1,830 @@
+<!-- d3 for best animation-->
+<html>
+    <head>
+		<title>UI Expert</title>
+		<script
+  src="https://code.jquery.com/jquery-3.3.1.min.js"
+  integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8="
+  crossorigin="anonymous"></script>
+
+
+        <style>
+        body{
+            text-align: center;
+        }
+        .class-a1{
+            border-radius: 10px;
+            border: solid #b3adad 1px;
+            text-align: center;
+            height: 42px;
+            width: 200px;
+            font-size: 20px;
+            font-style: italic;    
+            color: #4d5f4d;
+
+
+        }
+        h2{
+            font-family: Arial, Helvetica, sans-serif;
+            color: #121a79;
+			text-shadow:0 2px 1px #c9d2b8;
+        }
+
+        input:focus
+        {
+            outline: none;
+        }
+        .content{
+            margin-top: 10px;
+            margin-left: auto;
+            margin-right: auto;
+            width: 90%;
+        }
+        .hrtop{
+            color: gray;
+            margin-bottom : 57px;
+        }
+        .left{
+            text-align: left;
+        }
+        .innerdiv{
+            background: #686d561c;
+            min-block-size: 150px;
+        }
+        .innercontent{
+            padding-top: 10px;
+			padding-bottom: 10px;
+        }
+
+.normal-container {
+	position: absolute;
+	height: 100%;
+	width: 100%;
+}
+
+.smile-rating-container {
+	position: relative;
+	height: 10%;
+	min-width: 220px;
+	max-width: 520px;
+	margin: auto;
+	font-family: 'Roboto', sans-serif;
+	top: 20%;
+}
+
+.submit-rating {
+	display: flex;
+	align-items: center;
+	justify-content: center;
+}
+.rating-label {
+	position: relative;
+	font-size: 1.6em;
+	text-align: center;
+	flex: 0.34;
+	z-index: 3;
+	font-weight: bold;
+	cursor: pointer;
+	color: #d0cccd;
+	transition: 500ms;
+}
+.rating-label:hover, .rating-label:active {
+	color: #d0cccd;
+}
+.rating-label-fun {
+	left: -58px;	
+	text-align: right;
+}
+.rating-label-meh {
+	left: 58px;	
+	text-align: left;
+	color: #222;
+}
+.smile-rating-container input {
+	display: none;
+}
+.toggle-rating-pill {
+	position: relative;
+	height: 65px;
+	width: 165px;
+	background: #e71d50;
+	border-radius: 500px;
+	transition: all 500ms;
+}
+
+.smile-rating-toggle {
+	position: absolute;
+	width: 54px;
+	height: 54px;
+	background-color: white;
+	left: 182px;
+	border-radius: 500px;
+	transition: all 500ms;
+	z-index: 4;
+}
+.rating-eye {
+	position: absolute;
+	height: 12px;
+	width: 8px;
+	top: 22px;
+	background: #e00c41;
+	border-radius: 500px;
+	z-index: 5;
+	transition: all 440ms;
+	animation: blink-eye 3s infinite;
+}
+@keyframes blink-eye {
+	0% {
+		height: 12px;
+		width: 8px;
+		top: 22px;
+	}
+	20% {
+		height: 12px;
+		width: 8px;
+		top: 22px;
+	}
+	40% {
+		height: 12px;
+		width: 8px;
+		top: 22px;		
+	}
+	60% {
+		height: 12px;
+		width: 8px;
+		top: 22px;
+	}
+	80% {
+		height: 12px;
+		width: 8px;
+		top: 22px;
+	}
+	90% {
+		height: 12px;
+		width: 8px;
+		top: 22px;		
+	}
+	95% {
+		height: 2px;
+		width: 8px;
+		top: 30px;
+	}
+	100% {
+		height: 12px;
+		width: 8px;
+		top: 22px;
+	}
+}
+
+.rating-eye-left {
+	left: 192px;
+}
+.rating-eye-right {
+	left: 216px;
+}
+
+.mouth {
+	position: absolute;
+	width: 28px;
+	height: 20px;
+	z-index: 6;
+	border: 4px solid #e00c41;
+	border-radius: 10%;
+	border-bottom-color: rgba(1,1,1,0);
+	border-right-color: rgba(1,1,1,0);
+	border-left-color: rgba(1,1,1,0);
+	top: 42px;
+	left: 190px;
+	transition: all 500ms;
+}
+
+/*
+Toggle Changes
+*/
+
+#meh:checked~.rating-label-meh {
+	color: #555e63;
+}
+#fun:checked~.rating-label-meh {
+	color: #d0cccd;
+}
+#fun:checked~.mouth {
+	border: 4px solid #00b9ee;
+	border-bottom-color: rgba(1,1,1,0);
+	border-right-color: rgba(1,1,1,0);
+	border-left-color: rgba(1,1,1,0);
+	top: 23px;
+	left: 291px;
+	transform: rotateX(180deg);
+	border-radius: 100%;
+}
+
+#fun:checked~.rating-label-fun {
+	color: #555e63;
+}
+#fun:checked~.smile-rating-toggle {
+	left: 282px;
+}
+
+#fun:checked~.rating-eye-left {
+	left: 292px;
+}
+#fun:checked~.rating-eye-right {
+	left: 316px;
+}
+
+#fun:checked~.toggle-rating-pill {
+	background-color: #00b9ee;
+}
+
+#fun:checked~.rating-eye {
+	background-color: #00b9ee;
+}
+
+
+@media only screen and (max-width:524px) {
+	.normal-container {
+		position: absolute;
+		height: 100%;
+		width: 100%;
+	}
+	.smile-rating-container {
+		position: relative;
+		height: 10%;
+		width: 490px;
+		margin: auto;
+		font-family: 'Roboto', sans-serif;
+		top: 20%;
+	}
+
+	.submit-rating {
+		display: flex;
+		align-items: center;
+		justify-content: center;
+	}
+	.rating-label {
+		position: relative;
+		font-size: 1.6em;
+		text-align: center;
+		flex: 0.34;
+		z-index: 3;
+		font-weight: bold;
+		cursor: pointer;
+		color: #d0cccd;
+		transition: 500ms;
+	}
+	.rating-label:hover, .rating-label:active {
+		color: #d0cccd;
+	}
+	.rating-label-fun {
+		left: -58px;	
+		text-align: right;
+	}
+	.rating-label-meh {
+		left: 50px;	
+		text-align: left;
+		color: #222;
+	}
+	.smile-rating-container input {
+		display: none;
+	}
+
+	.smile-rating-toggle-container {
+
+	}
+
+	.toggle-rating-pill {
+		position: relative;
+		height: 65px;
+		width: 165px;
+		background: #d0cccd;
+		border-radius: 500px;
+		transition: all 500ms;
+	}
+
+	.smile-rating-toggle {
+		position: absolute;
+		width: 54px;
+		height: 54px;
+		background-color: white;
+		left: 168px;
+		border-radius: 500px;
+		transition: all 500ms;
+		z-index: 4;
+	}
+	.rating-eye {
+		position: absolute;
+		height: 12px;
+		width: 8px;
+		background: #d0cccd;
+		border-radius: 500px;
+		top: 22px;
+		z-index: 5;
+		transition: all 440ms;
+	}
+	.rating-eye-left {
+		left: 180px;
+	}
+	.rating-eye-right {
+		left: 201px;
+	}
+
+	.mouth {
+		position: absolute;
+		width: 28px;
+		height: 20px;
+		z-index: 6;
+		border: 4px solid #d0cccd;
+		border-radius: 10%;
+		border-bottom-color: rgba(1,1,1,0);
+		border-right-color: rgba(1,1,1,0);
+		border-left-color: rgba(1,1,1,0);
+		top: 42px;
+		left: 177px;
+		transition: all 500ms;
+	}
+
+	/*
+	Toggle Changes
+	*/
+
+	#meh:checked~.rating-label-meh {
+		color: #555e63;
+	}
+	#fun:checked~.rating-label-meh {
+		color: #d0cccd;
+	}
+	#fun:checked~.mouth {
+		border: 4px solid #00b9ee;
+		border-bottom-color: rgba(1,1,1,0);
+		border-right-color: rgba(1,1,1,0);
+		border-left-color: rgba(1,1,1,0);
+		top: 23px;
+		left: 275px;
+		transform: rotateX(180deg);
+		border-radius: 100%;
+	}
+
+	#fun:checked~.rating-label-fun {
+		color: #555e63;
+	}
+	#fun:checked~.smile-rating-toggle {
+		left: 266px;
+	}
+
+	#fun:checked~.rating-eye-left {
+		left: 275px;
+	}
+	#fun:checked~.rating-eye-right {
+		left: 300px;
+	}
+
+	#fun:checked~.toggle-rating-pill {
+		background-color: #00b9ee;
+	}
+
+	#fun:checked~.rating-eye {
+		background-color: #00b9ee;
+	}
+
+}
+
+
+
+
+
+
+	.divdesign1{
+		width:100px;
+		height: 100px;
+		background: rgb(43, 46, 192);
+		display: inline-block;
+	}
+	.divdesign2{
+		width: 100px;
+    	height: 100px;
+    	background: rgb(43, 46, 192);
+    	display: inline-block;
+    	border-radius: 100px;
+	}
+	.divdesign3{
+		width:100px;
+		height: 100px;
+		background: rgb(43, 46, 192);
+		display: inline-block;
+		border-radius: 1px 1px 1px 500px;
+		animation: mymove 5s infinite;
+		position: relative
+	}
+	.divdesign4{
+		width:100px;
+		height: 100px;
+		background: rgb(43, 46, 192);
+		display: inline-block;
+		animation: blink-eye 3s infinite;
+	}
+	@keyframes mymove {
+    from {left: 0px;}
+    to {left: 200px;}
+}
+
+svg {
+	fill: rgb(21, 160, 25);
+	height: 3.6rem;
+	width: 3.6rem;
+	margin: 0.2rem;
+}
+
+.card {
+	display: -webkit-box;
+	display: -ms-flexbox;
+	display: flex;
+	margin: auto;
+	-webkit-box-shadow: 0 0.5rem 1rem rgba(0, 0, 16, 0.19), 0 0.3rem 0.3rem rgba(0, 0, 16, 0.23);
+	box-shadow: 0 0.5rem 1rem rgba(0, 0, 16, 0.19), 0 0.3rem 0.3rem rgba(0, 0, 16, 0.23);
+	background-color: rgb(255, 255, 255);
+	padding: 0.8rem;
+	width: 33rem;
+}
+.card1{
+    width: 40rem;
+    height: auto;
+    display: inline-block;
+    z-index: -1;
+    /* background-color: white; */
+    box-shadow: 0 0.5rem 0.3rem grey;
+    background-color: white;
+    padding: 10px;
+}
+.mycard{
+    box-shadow: 0 0.5rem 0.3rem rgb(129, 127, 131);
+    min-height: 100px;
+    width: 30rem;
+    background-color: #555e63;
+    display: inline-block;
+    margin: 10px;
+}
+@keyframes mymv{
+	from{left: -100px;}
+	to{left:100px;}
+}
+.my-ani{
+	animation: mymv 2s infinite;
+	position: relative;
+	display: inline-block
+}
+.header{
+	position: static;
+	display: inline-block;
+	width: 100%;
+
+}
+.myapp{
+	display: inline-block;
+	width: 25rem;
+	height: 35rem;
+	background-color: white;
+	position: relative;
+}
+.header-myapp{
+    width: 100%;
+    height: 4rem;
+    background-color: #3b5b80;
+	display: flex;
+    position: absolute;
+}
+.app-title{
+    color: #ffffff;
+    display: grid;
+    margin: 1rem 0rem 1rem 0rem;
+    font-size: 22px;
+}
+.menu-bar{
+	width: 3rem;
+    height: 0.2rem;
+    background-color: white;
+    margin: 9px 22px;
+}
+.appmenu{
+	cursor: pointer;
+    margin-bottom: 1rem;
+    position: relative;
+    margin-top: 0.5rem;
+}
+.appstng{
+	width: 5px;
+	height: 5px;
+	border-radius: 10px;
+	background-color: white;
+	display: inline-block;
+	margin: 2px;
+
+}
+.appsettings{
+	width: 0.2rem;
+    position: absolute;
+    margin: 46%;
+}
+.menu-content{
+	display: none;
+	width: 0%;
+	height: 100%;
+	background: #325682fa;
+	position: absolute;
+}
+.app-setting-content{
+	width: 0%;
+	display: none;
+    height: 0%;
+    margin-left: 100%;
+    background-color: #325682fa;
+    position: absolute;
+}
+.app-setting-container{
+	width: 10%;
+    position: absolute;
+    background-color: #3b5b80;
+    height: 90%;
+    margin-left: 90%;
+	cursor: pointer;
+}
+
+.myapp-selection{
+	width: 80%;
+	height: 30rem;
+	display: inline-block;
+	background-color: white;
+	position: relative;
+	margin: 2rem;
+}
+nav{
+	width: 100%;
+	height: 4rem;
+	background-color: #3b5b80;
+	display: inline-block;
+	position: relative;
+}
+.parent-menu{
+	width: 100%;
+}
+     </style>
+        <script>
+
+ !function() {
+  var t = window.s360 = window.s360 || [];
+  if (!t.init) {
+    if (t.invoked) return void (window.console && console.error && console.error("S360 snippet included twice."));
+    t.invoked = !0,
+    t.load = function(t,u) {
+      var o = document.createElement("script");
+      o.type = "text/javascript", o.async = !0, o.crossorigin = "anonymous"; o.src = u+"main.js";
+      var a,b;a= document.createAttribute("data-config"); a.value=t;b=document.createAttribute("data-url");b.value=u;
+      o.setAttributeNode(a);o.setAttributeNode(b);
+      var i = document.getElementsByTagName("script")[0];
+      i.parentNode.insertBefore(o, i);
+    };
+  }
+}();
+s360.load('46388',"./");
+
+$(document).ready(function(){
+		
+
+			$("#myapp").click(function(e)
+  			{
+				
+				  
+					if(e.target.id != "menuBar" && e.target.id != "menuContent" && e.target.className != "menu-bar")
+					$("#menuContent").animate({width:"0%"},150);
+
+					if(e.target.id != "appSettingContainer" && e.target.className != "appstng"						
+						&& e.target.className != "appsettings")
+					$("#appSetting").animate({width:"0%",height:"0%","margin-left":"100%"},150);
+				  
+  			}
+			);
+
+			$("#menuBar").click(function(){
+				$("#menuContent").show();
+				$("#menuContent").animate({width:"50%"},150);
+				
+			});
+
+});
+
+		function appSetting(){
+				$("#appSetting").show();
+				$("#appSetting").animate({width:"35%",height:"28%","margin-left":"65%"},150);
+			}
+
+			
+
+
+        </script>
+    </head>
+    <body>
+        <div class = 'content'>
+            <div class="left header">
+					<h2> CSS ELEMENT DESIGNES</h2>
+					
+            </div>
+			<hr class="hrtop"/>
+                
+
+
+                <div id="textbox">
+                        <div class="left">
+                            <h2>Text Box</h2>
+                        </div>
+                        <div class="innerdiv">
+                            <div class="innercontent">
+                                    <input class="class-a1"type="text" name = "user" placeholder="User name" id = "user" spellcheck="false"/>
+                            </div>
+                        </div>
+                        
+                </div>
+				<!--
+					https://freefrontend.com/css-radio-buttons/
+				-->
+
+                <div>
+                    <div class="left">
+                        <h2>Radio Button</h2>
+                    </div>
+                    <div class="innerdiv">
+                        <div class="innercontent">
+                                        <div class="smile-rating-container">
+                                            <div class="smile-rating-toggle-container">
+                                                <form class="submit-rating">
+                                                    <input id="meh"  name="satisfaction" type="radio" /> 
+                                                    <input id="fun" name="satisfaction" type="radio" /> 
+                                                    <label for="meh" class="rating-label rating-label-meh">Bad</label>
+                                                    <div class="smile-rating-toggle"></div>
+                                                    
+                                                    <div class="rating-eye rating-eye-left"></div>
+                                                    <div class="rating-eye rating-eye-right"></div>
+                                                    
+                                                    <div class="mouth rating-eye-bad-mouth"></div>
+                                                    
+                                                    <div class="toggle-rating-pill"></div>
+                                                    <label for="fun" class="rating-label rating-label-fun">Fun</label>
+                                                </form>
+                                            </div>
+										</div>
+										
+										<br/>
+
+										<svg viewBox="0 0 24 24"><path d="M12,17.5C14.33,17.5 16.3,16.04 17.11,14H6.89C7.69,16.04 9.67,17.5 12,17.5M8.5,11A1.5,1.5 0 0,0 10,9.5A1.5,1.5 0 0,0 8.5,8A1.5,1.5 0 0,0 7,9.5A1.5,1.5 0 0,0 8.5,11M15.5,11A1.5,1.5 0 0,0 17,9.5A1.5,1.5 0 0,0 15.5,8A1.5,1.5 0 0,0 14,9.5A1.5,1.5 0 0,0 15.5,11M12,20A8,8 0 0,1 4,12A8,8 0 0,1 12,4A8,8 0 0,1 20,12A8,8 0 0,1 12,20M12,2C6.47,2 2,6.5 2,12A10,10 0 0,0 12,22A10,10 0 0,0 22,12A10,10 0 0,0 12,2Z" /></svg>
+
+										<br/>
+										<svg viewBox="0 0 24 24"><path d="M20,12A8,8 0 0,0 12,4A8,8 0 0,0 4,12A8,8 0 0,0 12,20A8,8 0 0,0 20,12M22,12A10,10 0 0,1 12,22A10,10 0 0,1 2,12A10,10 0 0,1 12,2A10,10 0 0,1 22,12M10,9.5C10,10.3 9.3,11 8.5,11C7.7,11 7,10.3 7,9.5C7,8.7 7.7,8 8.5,8C9.3,8 10,8.7 10,9.5M17,9.5C17,10.3 16.3,11 15.5,11C14.7,11 14,10.3 14,9.5C14,8.7 14.7,8 15.5,8C16.3,8 17,8.7 17,9.5M12,17.23C10.25,17.23 8.71,16.5 7.81,15.42L9.23,14C9.68,14.72 10.75,15.23 12,15.23C13.25,15.23 14.32,14.72 14.77,14L16.19,15.42C15.29,16.5 13.75,17.23 12,17.23Z" /></svg>
+
+                        </div>
+                    </div>
+
+				</div>
+
+				
+				<div id="textbox">
+                        <div class="left">
+                            <h2>Div Element</h2>
+                        </div>
+                        <div class="innerdiv">
+                            <div class="innercontent">
+							
+										<div class="divdesign1">
+										
+										</div>
+										<br/>
+										<div class="divdesign2">
+										
+										</div>
+										<br/>
+										<div class="divdesign3">
+										
+										</div>
+
+										<br/>
+										<div class="divdesign4">
+										
+										</div>
+
+										<br/>
+										<div class="card">
+
+										</div>
+
+										<br/>
+										<div class="card1">
+											<p style="color:rgb(14, 106, 134)"> This is card divs</p>
+											<div class="mycard"> 
+												<p>my invitation </p>
+											</div>
+											<div class="mycard">
+												<p>my invitation </p>
+											</div>
+											<div class="mycard">
+												<p>my invitation </p>
+											</div>
+										</div>
+								
+                                  
+                            </div>
+                        </div>
+                        
+				</div>
+				
+				<div>
+                        <div class="left">
+                            <h2>Menu</h2>
+                        </div>
+                        <div class="innerdiv">
+                            <div class="innercontent">
+							
+                             <div class="myapp" id="myapp">
+									<div class="header-myapp">
+										<div class="appmenu" id="menuBar">
+												<div class="menu-bar"></div>
+												<div class="menu-bar"></div>
+												<div class="menu-bar"></div>
+										</div>
+											
+										<span class="app-title left">Coder</span>
+										<div class="app-setting-container" id="appSettingContainer" onclick="appSetting();">
+											<div class="appsettings" >
+												<div class="appstng"></div>
+												<div class="appstng"></div>
+												<div class="appstng"></div>
+											</div>
+										</div>
+										
+									</div>
+									<div class="menu-content" id="menuContent">
+									
+									</div>
+									<div class="app-setting-content" id="appSetting">
+
+									</div>
+
+							 </div>
+							
+
+
+						<div class="myapp-selection">
+							<nav>
+								<ul>
+									<li class="parent-menu">
+										<a href="#">Selection-A</a>
+										<ul>
+											<li>
+												<a href="#">Selection-A1</a>
+											</li>
+											<li>
+													<a href="#">Selection-A2</a>
+											</li>
+											<li>
+													<a href="#">Selection-A3</a>
+											</li>
+										</ul>
+									</li>
+									<li class="parent-menu"> 
+											<a href="#">Selection-B</a>
+										<ul>
+											<li>
+													<a href="#">Selection-B1</a>
+											</li>
+											<li>
+													<a href="#">Selection-B2</a>
+											</li>
+											<li>
+													<a href="#">Selection-B3</a>
+											</li>
+										</ul>
+									</li>
+									<li class="parent-menu">
+											<a href="#">Selection-C</a>
+									</li>
+									<li class="parent-menu">
+											<a href="#">Selection-D</a>
+											<ul>
+												<li>
+														<a href="#">Selection-D1</a>
+												</li>
+												<li>
+														<a href="#">Selection-D2</a>
+												</li>
+											</ul>
+									</li>
+								</ul>
+							</nav>
+						</div>
+
+						
+                            </div>
+                        </div>
+				</div>
+				
+
+        </div>
+    </body>
+</html>

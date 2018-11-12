@@ -1,0 +1,453 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta http-equiv="content-type" content="text/html;charset=UTF-8" />
+<meta charset="utf-8" />
+<title>Chat Configuration</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+<meta content="" name="description" />
+<meta content="" name="author" />
+<link href="assets/plugins/boostrap-slider/css/slider.css" rel="stylesheet" type="text/css"/>
+
+<style type="text/css">
+  .glyph-custom-icon{
+    display: inline-block;
+    width: 15%;
+    height: 50px;
+    background: #f1f1f1;
+    border-radius: 3px;
+    margin: 5px;
+    text-align: center;
+  }
+  .glyph-custom-icon.active{
+    background: #1a4371;
+    color: white;
+  }
+  .glyph-custom-icon:hover{
+    background: #1a4371;
+    color: white;
+    cursor: pointer;
+  }
+
+  .glyph-custom-icon i:before{
+    font-size: 30px;
+  }
+
+</style>
+
+
+
+
+
+<!-- BEGIN PLUGIN CSS -->
+<link href="assets/plugins/pace/pace-theme-flash.css" rel="stylesheet" type="text/css" media="screen"/>
+<link href="assets/plugins/bootstrapv3/css/bootstrap.min.css" rel="stylesheet" type="text/css"/>
+<link href="assets/plugins/bootstrapv3/css/bootstrap-theme.min.css" rel="stylesheet" type="text/css"/>
+<link href="assets/plugins/font-awesome/css/font-awesome.css" rel="stylesheet" type="text/css"/>
+<link href="assets/plugins/animate.min.css" rel="stylesheet" type="text/css"/>
+<link href="assets/plugins/jquery-scrollbar/jquery.scrollbar.css" rel="stylesheet" type="text/css"/>
+<link href="assets/plugins/bootstrap-colorpicker/css/bootstrap-colorpicker.css" rel="stylesheet" type="text/css"/>
+<!-- END PLUGIN CSS -->
+<!-- BEGIN CORE CSS FRAMEWORK -->
+<link href="webarch/css/webarch.css" rel="stylesheet" type="text/css"/>
+<!-- END CORE CSS FRAMEWORK -->
+
+<link href="chat_icons/font/flaticon.css" rel="stylesheet" type="text/css"/>
+
+
+</head>
+<!-- BEGIN BODY -->
+<body class="">
+<!-- BEGIN HEADER -->
+<div class="header navbar navbar-inverse "> 
+  <!-- BEGIN TOP NAVIGATION BAR -->
+  <div class="navbar-inner">
+  <div class="header-seperation"> 
+    <ul class="nav pull-left notifcation-center visible-xs visible-sm"> 
+     <li class="dropdown"> 
+      <a href="#main-menu" data-webarch="toggle-left-side"> 
+        <div class="iconset top-menu-toggle-white"></div> 
+      </a> 
+     </li>     
+    </ul>
+      <!-- BEGIN LOGO --> 
+      <a href="index.html">
+        
+      <img src="assets/img/logo.png" class="logo" alt=""  data-src="assets/img/logo.png" data-src-retina="assets/img/logo2x.png" width="106" height="21"/>
+    
+      </a>
+      <!-- END LOGO --> 
+      <ul class="nav pull-right notifcation-center">  
+        <li class="dropdown hidden-xs hidden-sm"> 
+          <a href="index.html" class="dropdown-toggle active" data-toggle=""> 
+            <div class="iconset top-home"></div>
+          </a>
+        </li>
+        <li class="dropdown hidden-xs hidden-sm"> 
+          <a href="email.html" class="dropdown-toggle" > 
+            <div class="iconset top-messages"></div><span class="badge">2</span> 
+          </a>
+        </li>
+    <li class="dropdown visible-xs visible-sm"> 
+      <a href="#" data-webarch="toggle-right-side">
+        <div class="iconset top-chat-white "></div>
+      </a> 
+    </li>        
+      </ul>
+      </div>
+      <!-- END RESPONSIVE MENU TOGGLER --> 
+      <div class="header-quick-nav" > 
+      <!-- BEGIN TOP NAVIGATION MENU -->
+    <div class="pull-left"> 
+        <ul class="nav quick-section">
+          <li class="quicklinks"> <a href="#" class="" id="layout-condensed-toggle" >
+            <div class="iconset top-menu-toggle-dark"></div>
+            </a> </li>
+        </ul>
+        <ul class="nav quick-section">
+          <li class="quicklinks"> <a href="#" class="" >
+            <div class="iconset top-reload"></div>
+            </a> </li>
+          <li class="quicklinks"> <span class="h-seperate"></span></li>
+          <li class="quicklinks"> <a href="#" class="" >
+            <div class="iconset top-tiles"></div>
+            </a> </li>
+      <li class="m-r-10 input-prepend inside search-form no-boarder">
+        <span class="add-on"> <span class="iconset top-search"></span></span>
+         <input name="" type="text"  class="no-boarder " placeholder="Search Dashboard" style="width:250px;">
+      </li>
+      </ul>
+    </div>
+   <!-- END TOP NAVIGATION MENU -->
+   <!-- BEGIN CHAT TOGGLER -->
+      <div class="pull-right"> 
+   
+      </div>
+     <!-- END CHAT TOGGLER -->
+      </div> 
+      <!-- END TOP NAVIGATION MENU --> 
+   
+  </div>
+  <!-- END TOP NAVIGATION BAR --> 
+</div>
+<!-- END HEADER --> 
+<!-- BEGIN CONTAINER -->
+<div class="page-container row"> 
+  <!-- BEGIN SIDEBAR -->
+    <div class="page-sidebar " id="main-menu">
+    <!-- BEGIN MINI-PROFILE -->
+    <div class="page-sidebar-wrapper scrollbar-dynamic" id="main-menu-wrapper">
+      <div class="user-info-wrapper">
+        <div class="profile-wrapper"> <img src="assets/img/profiles/avatar.jpg"  alt="" data-src="assets/img/profiles/avatar.jpg" data-src-retina="assets/img/profiles/avatar2x.jpg" width="69" height="69" /> </div>
+        <div class="user-info">
+          <div class="greeting">Welcome</div>
+          <div class="username">John <span class="semi-bold">Smith</span></div>
+          <div class="status">Status<a href="#">
+            <div class="status-icon green"></div>
+            Online</a></div>
+        </div>
+      </div>
+      <!-- END MINI-PROFILE -->
+      <!-- BEGIN SIDEBAR MENU -->
+      <p class="menu-title">BROWSE <span class="pull-right"><a href="javascript:;"><i class="fa fa-refresh"></i></a></span></p>
+      <ul>
+        <li class="start "> <a href="index.html"> <i class="icon-custom-home"></i> <span class="title">Dashboard</span> <span class="selected"></span> <span class="arrow "></span> </a> 
+           <ul class="sub-menu">
+            </ul>
+        </li>
+      
+      </ul>
+      <div class="clearfix"></div>
+      <!-- END SIDEBAR MENU -->
+    </div>
+  </div>
+  <!-- END SIDEBAR --> 
+  <!-- BEGIN PAGE CONTAINER-->
+  <div class="page-content">
+    <div class="content">
+      <div class="row">
+        <div class="col-md-12">
+          <div class="grid simple">
+            <div class="grid-title no-border">
+              <h4>Chat <span class="semi-bold">Configuration</span></h4>
+            </div>
+            <div class="grid-body no-border">
+              <div class="row">
+
+                <div class="col-md-4">
+                  <h3>Select <span class="semi-bold">Icon</span></h3>
+
+                  <div class="glyph-custom-icon"><i class="glyph-icon flaticon-speak"></i></div>
+                  <div class="glyph-custom-icon"><i class="glyph-icon flaticon-talk"></i></div>
+                  <div class="glyph-custom-icon"><i class="glyph-icon flaticon-support"></i></div>
+                  <div class="glyph-custom-icon"><i class="glyph-icon flaticon-chat"></i></div>
+                  <div class="glyph-custom-icon"><i class="glyph-icon flaticon-sms"></i></div>
+                  <div class="glyph-custom-icon"><i class="glyph-icon flaticon-chat-1"></i></div>
+                  <div class="glyph-custom-icon"><i class="glyph-icon flaticon-talk-1"></i></div>
+                  <div class="glyph-custom-icon"><i class="glyph-icon flaticon-woman"></i></div>
+
+                  <div class="glyph-custom-icon"><i class="glyph-icon flaticon-chat-2"></i></div>
+                  <div class="glyph-custom-icon"><i class="glyph-icon flaticon-comment-3"></i></div>
+                  <div class="glyph-custom-icon"><i class="glyph-icon flaticon-comment-6"></i></div>
+                  <div class="glyph-custom-icon"><i class="glyph-icon flaticon-talk-3"></i></div>
+                  <div class="glyph-custom-icon"><i class="glyph-icon flaticon-communication"></i></div>
+                  <div class="glyph-custom-icon"><i class="glyph-icon flaticon-support-1"></i></div>
+                  <div class="glyph-custom-icon"><i class="glyph-icon flaticon-customer-service"></i></div>
+                  <div class="glyph-custom-icon"><i class="glyph-icon flaticon-support-2"></i></div>
+
+                   <div class="glyph-custom-icon"><i class="glyph-icon flaticon-customer-service-1"></i></div>
+                  <div class="glyph-custom-icon"><i class="glyph-icon flaticon-headset"></i></div>
+                  <div class="glyph-custom-icon"><i class="glyph-icon flaticon-headphones"></i></div>
+                  <div class="glyph-custom-icon"><i class="glyph-icon flaticon-male-telemarketer"></i></div>
+                  <div class="glyph-custom-icon"><i class="glyph-icon flaticon-24-hours-support"></i></div>
+                  <div class="glyph-custom-icon"><i class="glyph-icon flaticon-24-hours-support-1"></i></div>
+                  <div class="glyph-custom-icon"><i class="glyph-icon flaticon-customer-service-2"></i></div>
+                  
+                </div>
+
+                <div class="col-md-4">
+                  <h3>Icon <span class="semi-bold">Size & Colors</span></h3>
+                  <div class="form-group">
+                        <label class="form-label">Height</label>
+                        <span class="help">e.g. "Set Icon Height"</span>
+                        <div class="controls">
+                          <input type="number" data-toggle="tooltip" title="" class="form-control chat-config-data icon-height" value="50">
+                        </div>
+                  </div>
+                  <div class="form-group">
+                        <label class="form-label">Width</label>
+                        <span class="help">e.g. "Set Icon Width"</span>
+                        <div class="controls">
+                          <input type="number" data-toggle="tooltip" title="" class="form-control chat-config-data icon-width" value="50">
+                        </div>
+                  </div>
+                  <div class="form-group">
+                        <label class="form-label">Background Color</label>
+                        <span class="help">e.g. "Set Icon Background Color"</span>
+                        <div class="controls">
+                          <div  class="input-group colorpicker-component">
+                          <input type="text" value="#000" data-color-format="hex" class="form-control chat-color-data icon-bg-color" /> 
+                          <span class="input-group-addon"><i style="width: 35px; height: 20px;"></i></span>
+                         </div>
+                        </div>
+                  </div>
+                   <div class="form-group">
+                        <label class="form-label">Color</label>
+                        <span class="help">e.g. "Set Icon Font Color"</span>
+                        <div class="controls">
+                          <div  class="input-group colorpicker-component">
+                          <input type="text" value="#fff" data-color-format="hex" class="form-control chat-color-data icon-font-color" /> 
+                          <span class="input-group-addon"><i style="width: 35px; height: 20px;"></i></span>
+                         </div>
+                        </div>
+                  </div>
+                </div>
+
+                <div class="col-md-4">
+                  <h3>Icon <span class="semi-bold">Radius & Font Size</span></h3>
+                   <div class="form-group">
+                        <label class="form-label">Radius</label>
+                        <span class="help">e.g. "Set Icon Radius"</span>
+                        <div class="controls">
+                          <div class="row">
+                          <div class="slider info col-md-12">
+                            <input   type="text" class="slider-element form-control chat-config-data icon-border-radius" value="" data-slider-max="100" data-slider-step="1" data-slider-value="10" data-slider-orientation="horizontal" data-slider-selection="after" data-slider-tooltip="hide">
+                          </div>
+                    </div>
+                        </div>
+                  </div>
+                   <div class="form-group">
+                        <label class="form-label">Font Size</label>
+                        <span class="help">e.g. "Set Icon Font Size"</span>
+                        <div class="controls">
+                          <input type="number" data-toggle="tooltip" title="" class="form-control chat-config-data icon-font-size" value="12">
+                        </div>
+                  </div>
+                </div>  
+                
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+  
+    </div>
+  </div>
+  <!-- END PAGE -->
+
+</div>
+<!-- END CONTAINER -->
+<script src="assets/plugins/pace/pace.min.js" type="text/javascript"></script>  
+<!-- BEGIN JS DEPENDECENCIES--> 
+<script src="assets/plugins/jquery/jquery-1.11.3.min.js" type="text/javascript"></script> 
+<script src="assets/plugins/bootstrapv3/js/bootstrap.min.js" type="text/javascript"></script> 
+<script src="assets/plugins/jquery-block-ui/jqueryblockui.min.js" type="text/javascript"></script> 
+<script src="assets/plugins/jquery-unveil/jquery.unveil.min.js" type="text/javascript"></script> 
+<script src="assets/plugins/jquery-scrollbar/jquery.scrollbar.min.js" type="text/javascript"></script>
+<script src="assets/plugins/jquery-numberAnimate/jquery.animateNumbers.js" type="text/javascript"></script>
+<script src="assets/plugins/jquery-validation/js/jquery.validate.min.js" type="text/javascript"></script>
+<script src="assets/plugins/bootstrap-select2/select2.min.js" type="text/javascript"></script>
+<!-- END CORE JS DEPENDECENCIES--> 
+<!-- BEGIN CORE TEMPLATE JS --> 
+<script src="webarch/js/webarch.js" type="text/javascript"></script> 
+<script src="assets/js/chat.js" type="text/javascript"></script> 
+<!-- END CORE TEMPLATE JS --> 
+<!-- BEGIN PAGE LEVEL PLUGINS -->
+<script src="assets/plugins/modernizr.js" type="text/javascript"></script>
+<script src="assets/plugins/boostrap-slider/js/bootstrap-slider.js" type="text/javascript"></script>
+<!-- END PAGE LEVEL PLUGINS -->
+<script src="assets/plugins/bootstrap-colorpicker/js/bootstrap-colorpicker.js" type="text/javascript"></script>
+<!-- END PAGE LEVEL PLUGINS -->
+
+<script>
+  var config={
+     "chatIcon": {
+        "type": "icon",
+        "iconUrl": "glyph-icon flaticon-sms",
+        "bgHeight": 80,
+        "bgWidth": 80,
+        "bgRadius": 17,
+        "bgColor": "#113f75",
+        "imgHeight": 50,
+        "imgWidth": 50,
+        "fontSize": 40,
+        "color": "#fff"
+     },
+     "chatWindow": {
+        "mini":{
+          "wrapperHeight":230,
+          "wrapperWidth":350,
+          "headerHeight":120,
+          "headerWidth":350,
+          "inputBottomPosition":0,
+          "inputHeight":80,
+          "placeholder":"Leave a message..",
+          "offlineMessage":"Hi there! So we’re away right now, but if you leave us a message we’ll get back to you soon."
+        },
+        "max":{
+          "wrapperHeight":470,
+          "wrapperWidth":350,
+          "headerHeight":70,
+          "headerWidth":350,
+          "inputBottomPosition":55,
+          "inputHeight":50,
+          "placeholder":"Type your message",
+          "offlineMessage":"Hi there! So we’re away right now, but if you leave us a message we’ll get back to you soon."
+        }
+     }
+  };
+
+  function init(){
+
+    $('.slider-element').slider();
+    $("#layout-condensed-toggle").click();
+
+
+    $(".colorpicker-component").each(function(){
+      var obj=$(this).find(".chat-color-data");
+      if(obj.hasClass("icon-bg-color")){
+        $(this).colorpicker({color:config.chatIcon.bgColor,format :'hex'});
+      }else if(obj.hasClass('icon-font-color')){
+        $(this).colorpicker({color:config.chatIcon.color,format :'hex'});
+      }
+    });
+
+    $('.colorpicker-component').on('changeColor', function(event) {
+
+      var obj=$(this).find('.chat-color-data');
+      if(obj.hasClass('icon-font-color')){
+        config.chatIcon.color=obj.val();
+      }else if(obj.hasClass("icon-bg-color")){
+        config.chatIcon.bgColor=obj.val();
+      }
+
+      setConfig(config);
+    });
+
+    $(".chat-config-data").each(function(){
+        if($(this).hasClass("icon-height")){
+          $(this).val(config.chatIcon.bgHeight);
+        }else if($(this).hasClass("icon-width")){
+          $(this).val(config.chatIcon.bgWidth);
+        }else if($(this).hasClass("icon-font-size")){
+          $(this).val(config.chatIcon.fontSize);
+        }
+    });
+
+
+    $(".glyph-custom-icon").each(function(){
+      var icon=$(this).find("i");
+      if(icon.hasClass(config.chatIcon.iconUrl)){
+        $(this).addClass("active");
+      }
+    });
+
+    $(".chat-config-data").change(function(){
+      
+      if($(this).hasClass("icon-height")){
+        config.chatIcon.bgHeight=$(this).val();
+      }else if($(this).hasClass("icon-width")){
+        config.chatIcon.bgWidth=$(this).val();
+      }else if($(this).hasClass("icon-font-size")){
+        config.chatIcon.fontSize=$(this).val();
+      }
+
+      setConfig(config);
+    });
+
+    $(".glyph-custom-icon").click(function(){
+      $(".glyph-custom-icon").removeClass("active");
+      $(this).addClass("active");
+      var icon=$(this).find("i").attr("class");
+      config.chatIcon.iconUrl=icon;
+      setConfig(config);
+    });
+
+    $('.icon-border-radius').slider().on('slideStop', function(ev){
+    var val = $('.icon-border-radius').data('slider').getValue();
+      config.chatIcon.bgRadius=val;
+      setConfig(config);
+    });
+
+  }
+
+  function setConfig(config){
+    var $iframe = window.frames["s360-widget-iframe"];
+    $iframe.postMessage(config, '*');
+  }
+
+  $(document).ready(function() {    
+
+    init();
+
+  });
+
+</script>
+<!-- END JAVASCRIPTS -->
+
+<!-- Start of Async Widget Code -->
+<script>
+"use strict";
+
+!function() {
+  var t = window.s360 = window.s360 || [];
+  if (!t.init) {
+    if (t.invoked) return void (window.console && console.error && console.error("S360 snippet included twice."));
+    t.invoked = !0,
+    t.load = function(t,u) {
+      var o = document.createElement("script");
+      o.type = "text/javascript", o.async = !0, o.crossorigin = "anonymous"; o.src = u+"main.js";
+      var a,b;a= document.createAttribute("data-config"); a.value=t;b=document.createAttribute("data-url");b.value=u;
+      o.setAttributeNode(a);o.setAttributeNode(b);
+      var i = document.getElementsByTagName("script")[0];
+      i.parentNode.insertBefore(o, i);
+    };
+  }
+}();
+s360.load('46387',"./");
+
+</script>
+<!-- End of Async Widget Code -->
+</body>
+</html>
+
